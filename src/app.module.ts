@@ -6,6 +6,8 @@ import { InventoryModule } from './inventory/inventory.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from './inventory/Entity/product.entity';
+import { UserModule } from './user/user.module';
+import { User } from './user/Entity/user.entity';
 
 @Module({
   imports: [
@@ -21,7 +23,8 @@ import { Product } from './inventory/Entity/product.entity';
         database: configService.get<string>('POSTGRES_DATABASE'),
         ssl: true,
         entities: [
-          Product
+          Product,
+          User,
         ],
         synchronize: false,
       }),
@@ -30,7 +33,8 @@ import { Product } from './inventory/Entity/product.entity';
     TypeOrmModule.forFeature([
       Product
     ]),
-    InventoryModule
+    InventoryModule,
+    UserModule
   ],
   controllers: [AppController],
   providers: [
