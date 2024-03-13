@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { DBInventoryService } from './DBServices/dbInventory.service';
+import { ProductDTO } from './DTO/product.dto';
 
 @Injectable()
 export class InventoryService {
@@ -30,12 +31,23 @@ export class InventoryService {
     
   }
 
-  async getInventory(){
-    return await this.dbInventoryService.findAllProduct();
+  async getInventory(page: number, pageSize: number){
+    return await this.dbInventoryService.findAllProduct(page, pageSize);
   }
 
   async getInventoryItem(productid: string){
-    // TODO: check if id is uuid or not
     return await this.dbInventoryService.findProduct(productid);
+  }
+
+  async createInventory(payload: ProductDTO){
+    return await this.dbInventoryService.saveProduct(payload);
+  }
+
+  async updateInventory(payload: ProductDTO){
+    return await this.dbInventoryService.updateProduct(payload);
+  }
+
+  async deleteInventory(productid: string){
+    await this.dbInventoryService.deleteProduct(productid);
   }
 }

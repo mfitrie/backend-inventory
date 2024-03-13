@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from '../Entity/product.entity';
 import { Equal, Repository } from 'typeorm';
 import { faker } from '@faker-js/faker';
+import { ProductDTO } from '../DTO/product.dto';
 
 @Injectable()
 export class DBInventoryService {
@@ -46,9 +47,19 @@ export class DBInventoryService {
         }
     }
 
-    async findAllProduct(): Promise<Product[]>{
+    async findAllProduct(page: number = 1, pageSize: number = 10):  Promise<{ products: Product[], total: number }>{
         try {
-            return this.productRepository.find();
+            // return this.productRepository.find();
+            const [products, total] = await this.productRepository.findAndCount({
+                skip: (page - 1) * pageSize,
+                take: pageSize,
+            });
+            
+            return {
+                products,
+                total,
+            }
+
         } catch (error) {
             console.error(error);
             
@@ -67,6 +78,39 @@ export class DBInventoryService {
             console.error(error);
             
             return null
+        }
+    }
+
+    async updateProduct(payload: ProductDTO){
+        try {
+            return await this.productRepository.save({
+                id: payload.id,
+                ...payload
+            });
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    async saveProduct(payload: ProductDTO): Promise<Product>{
+        try {
+            const newProduct = this.productRepository.create(payload);
+            
+            return this.productRepository.save(newProduct);
+
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    }
+
+    async deleteProduct(productid: string){
+        try {
+            return await this.productRepository.delete({ id: productid })
+            
+        } catch (error) {
+            console.error(error);
         }
     }
 
