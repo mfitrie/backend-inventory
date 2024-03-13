@@ -58,4 +58,16 @@ export class DBUserService {
         }
     }
 
+    async findUser(email: string){
+        try {
+            return this.userRepository.findOne({
+                where: {
+                    email,
+                }
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
 }
