@@ -33,7 +33,8 @@ export class UserController {
         return res
         .cookie('access_token', token, {
             maxAge: 2592000000,
-            sameSite: true,
+            domain: 'localhost',
+            sameSite: "none",
             secure: false,
             httpOnly: true,
         })
