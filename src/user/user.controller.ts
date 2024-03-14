@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, Post, Req, Res, UnauthorizedException, UseGuards, UsePipes } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Post, Req, Res, UnauthorizedException, UseGuards, UsePipes } from '@nestjs/common';
 import { UserService } from './user.service';
 import { ZodValidationPipe } from 'nestjs-zod';
 import { UserSignInDTO } from './DTO/userSignIn.dto';
@@ -38,6 +38,7 @@ export class UserController {
             secure: false,
             httpOnly: false,
         })
+        .status(HttpStatus.OK)
         .json({
             access_token: token
         })
