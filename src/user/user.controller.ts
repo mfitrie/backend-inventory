@@ -44,12 +44,12 @@ export class UserController {
         })
     }
 
-    @Options("login")
-    async handleOptions(@Res() res: Response) {
-        res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-        res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-        res.status(HttpStatus.NO_CONTENT).send();
-    }
+    // @Options("login")
+    // async handleOptions(@Res() res: Response) {
+    //     res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+    //     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    //     res.status(HttpStatus.NO_CONTENT).send();
+    // }
 
 
     @Get("logout")
