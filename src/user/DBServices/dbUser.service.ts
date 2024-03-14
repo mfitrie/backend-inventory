@@ -20,7 +20,7 @@ export class DBUserService {
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 const listProducts: any = Array(10).fill(null).map((_item) => ({
                     id: faker.string.uuid(),
-                    name: faker.commerce.product(),
+                    name: faker.person.fullName(),
                     phoneno: faker.phone.number(),
                     address: faker.location.streetAddress(),
                     email: faker.internet.email(),

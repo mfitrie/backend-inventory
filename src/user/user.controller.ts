@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, Post, Res, UnauthorizedException, UseGuards, UsePipes } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, Res, UnauthorizedException, UseGuards, UsePipes } from '@nestjs/common';
 import { UserService } from './user.service';
 import { ZodValidationPipe } from 'nestjs-zod';
 import { UserSignInDTO } from './DTO/userSignIn.dto';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { JwtAuthGuard } from './Guards/jwt-auth.guard';
 // import { LocalGuard } from './Guards/local.guard';
 
@@ -33,10 +33,10 @@ export class UserController {
         return res
         .cookie('access_token', token, {
             maxAge: 2592000000,
-            domain: 'localhost',
-            sameSite: "none",
+            // domain: 'localhost',
+            sameSite: true,
             secure: false,
-            httpOnly: true,
+            httpOnly: false,
         })
         .json({
             access_token: token
@@ -45,18 +45,30 @@ export class UserController {
 
     @Get("logout")
     signOut(@Res() res: Response){
-        res.clearCookie('access_token').json({
+        res.clearCookie('access_token', {
+            secure: false,
+            sameSite: true,
+        }).json({
           msg: 'logout successful',
         })
     }
 
     @UseGuards(JwtAuthGuard)
-    @Get("user")
+    @Get("users")
     getAllUser(
         // @Req() req: Request
     ){
         // console.log("user: ", req.user)
         return this.userService.findAllUser();
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Get("user")
+    getUser(
+        @Req() req: Request
+    ){
+        const { email }: any = req.user;
+        return this.userService.findUser(email);
     }
 
     @Get("seeduserdb")
