@@ -11,7 +11,7 @@ async function bootstrap() {
     // origin: "https://frontend-inventory-snowy.vercel.app/",
     // origin: "http://localhost:3000",
     origin: "*",
-    // methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     // allowedHeaders: "Content-Type, Accept, Authorization",
     // credentials: true,
   });
