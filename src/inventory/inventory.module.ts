@@ -5,16 +5,14 @@ import { InventoryService } from './inventory.service';
 import { DBInventoryService } from './DBServices/dbInventory.service';
 import { Product } from './Entity/product.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from 'src/user/user.module';
 import { ConfigService } from '@nestjs/config';
-import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([
       Product,
     ]),
-    UserModule
+    // UserModule
   ],
   controllers: [
     InventoryController
@@ -23,7 +21,7 @@ import { JwtService } from '@nestjs/jwt';
     InventoryService, 
     DBInventoryService,
     ConfigService,
-    JwtService
+    // JwtService
   ]
 })
 export class InventoryModule {}

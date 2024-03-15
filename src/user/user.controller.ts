@@ -1,10 +1,9 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, HttpStatus, Post, Req, Res, UnauthorizedException, UseGuards, UsePipes } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Post, Req, Res, UnauthorizedException, UsePipes } from '@nestjs/common';
 import { UserService } from './user.service';
 import { ZodValidationPipe } from 'nestjs-zod';
 import { UserSignInDTO } from './DTO/userSignIn.dto';
 import { Request, Response } from 'express';
-import { JwtAuthGuard } from './Guards/jwt-auth.guard';
 // import { LocalGuard } from './Guards/local.guard';
 
 @UsePipes(ZodValidationPipe)
@@ -54,7 +53,7 @@ export class UserController {
         })
     }
 
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     @Get("users")
     getAllUser(
         // @Req() req: Request
@@ -63,7 +62,7 @@ export class UserController {
         return this.userService.findAllUser();
     }
 
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     @Get("user")
     getUser(
         @Req() req: Request
