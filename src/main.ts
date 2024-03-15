@@ -8,11 +8,12 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: "https://frontend-inventory-snowy.vercel.app/",
+    // origin: "https://frontend-inventory-snowy.vercel.app/",
     // origin: "http://localhost:3000",
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-    allowedHeaders: "Content-Type, Accept, Authorization",
-    credentials: true,
+    origin: "*",
+    // methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    // allowedHeaders: "Content-Type, Accept, Authorization",
+    // credentials: true,
   });
 
   app.use(cookieParser());
