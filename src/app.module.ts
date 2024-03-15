@@ -8,7 +8,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from './inventory/Entity/product.entity';
 import { UserModule } from './user/user.module';
 import { User } from './user/Entity/user.entity';
-import { PassportModule } from '@nestjs/passport';
 import { LocalStrategy } from './user/Strategy/local.strategy';
 // import { JwtModule } from '@nestjs/jwt';
 // import { JwtModule } from '@nestjs/jwt';
@@ -37,7 +36,7 @@ import { LocalStrategy } from './user/Strategy/local.strategy';
     TypeOrmModule.forFeature([
       Product
     ]),
-    PassportModule,
+    // PassportModule,
     // JwtModule.registerAsync({
     //   imports: [ConfigModule],
     //   useFactory: async (configService: ConfigService) => ({

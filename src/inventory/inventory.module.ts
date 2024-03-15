@@ -7,7 +7,6 @@ import { Product } from './Entity/product.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from 'src/user/user.module';
 import { ConfigService } from '@nestjs/config';
-import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -23,7 +22,7 @@ import { JwtService } from '@nestjs/jwt';
     InventoryService, 
     DBInventoryService,
     ConfigService,
-    JwtService
+    // JwtService
   ]
 })
 export class InventoryModule {}
