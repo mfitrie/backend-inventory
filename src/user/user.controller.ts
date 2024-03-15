@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, HttpStatus, Options, Post, Req, Res, UnauthorizedException, UseGuards, UsePipes } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Post, Req, Res, UnauthorizedException, UseGuards, UsePipes } from '@nestjs/common';
 import { UserService } from './user.service';
 import { ZodValidationPipe } from 'nestjs-zod';
 import { UserSignInDTO } from './DTO/userSignIn.dto';
@@ -34,8 +34,8 @@ export class UserController {
         .cookie('access_token', token, {
             maxAge: 2592000000,
             // domain: 'localhost',
-            sameSite: "none",
-            secure: true,
+            sameSite: true,
+            secure: false,
             httpOnly: false,
         })
         .status(HttpStatus.OK)
@@ -43,14 +43,6 @@ export class UserController {
             access_token: token
         })
     }
-
-    // @Options("login")
-    // async handleOptions(@Res() res: Response) {
-    //     res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-    //     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    //     res.status(HttpStatus.NO_CONTENT).send();
-    // }
-
 
     @Get("logout")
     signOut(@Res() res: Response){
