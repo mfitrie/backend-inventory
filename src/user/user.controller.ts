@@ -34,8 +34,8 @@ export class UserController {
         .cookie('access_token', token, {
             maxAge: 2592000000,
             // domain: 'localhost',
-            sameSite: true,
-            secure: false,
+            sameSite: "none",
+            secure: true,
             httpOnly: false,
         })
         .status(HttpStatus.OK)
