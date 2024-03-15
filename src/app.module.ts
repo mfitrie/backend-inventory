@@ -6,7 +6,6 @@ import { InventoryModule } from './inventory/inventory.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from './inventory/Entity/product.entity';
-import { UserModule } from './user/user.module';
 import { User } from './user/Entity/user.entity';
 import { LocalStrategy } from './user/Strategy/local.strategy';
 // import { JwtModule } from '@nestjs/jwt';
@@ -47,7 +46,7 @@ import { LocalStrategy } from './user/Strategy/local.strategy';
     //   inject: [ConfigService],
     // }),
     InventoryModule,
-    UserModule
+    // UserModule
   ],
   controllers: [AppController],
   providers: [
